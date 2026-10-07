@@ -22,8 +22,6 @@
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -124,43 +122,18 @@
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         vertical-align: middle;
       }
-      .before-after-container {
-        position: relative;
-        overflow: hidden;
-        user-select: none;
-      }
-      .slider-handle {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: #061b0e;
-        cursor: ew-resize;
-        z-index: 10;
-      }
-      .slider-circle {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        background: #061b0e;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-      }
-      .after-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        clip-path: inset(0 0 0 50%);
-      }
+      /* Before / after comparison slider */
+      .ba { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: #e3e3de; user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: ew-resize; }
+      .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; display: block; }
+      .ba .ba-after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+      .ba .ba-line { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: #fff; transform: translateX(-50%); box-shadow: 0 0 0 1px rgba(0,0,0,.15); pointer-events: none; }
+      .ba .ba-knob { position: absolute; top: 50%; left: var(--pos, 50%); width: 44px; height: 44px; transform: translate(-50%, -50%); border-radius: 50%; background: #fff; color: #061b0e; display: flex; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 2px 10px rgba(0,0,0,.35); pointer-events: none; font-size: 18px; }
+      .ba .ba-tag { position: absolute; bottom: 12px; padding: 4px 8px; font: 700 10px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #fff; pointer-events: none; }
+      .ba .ba-tag-before { left: 12px; background: rgba(0,0,0,.55); }
+      .ba .ba-tag-after { right: 12px; background: #7b5732; }
+      .ba input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
+      .ba input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 44px; height: 100%; }
+      .ba input[type=range]:focus-visible ~ .ba-knob { outline: 3px solid #ffcea0; outline-offset: 2px; }
       input[type=range]::-webkit-slider-runnable-track {
         background: #d0e9d4;
         height: 4px;
@@ -215,8 +188,8 @@
 <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Guaranteed Timeline</span>
 </div>
 <div class="flex flex-col">
-<span class="font-stat-value text-stat-value text-secondary">GENERAL CONTRACTOR</span>
-<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Licensed &amp; Insured in NYC</span>
+<span class="font-stat-value text-stat-value text-secondary">VOLUME BUYING</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Supplier rates passed on to you</span>
 </div>
 </div>
 <p class="lg:hidden font-label-caps text-[10px] text-outline italic">
@@ -238,44 +211,47 @@
 </div>
 </section>
 <!-- Before & After Photos -->
-<section class="py-16 bg-white">
-<div class="max-w-[900px] mx-auto px-margin-mobile md:px-8 mb-6">
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary">SPRUCE UP YOUR APARTMENT LIKE THE ONE BELOW</h3>
+<section id="work" class="py-16 bg-white">
+<div class="max-w-[1100px] mx-auto px-margin-mobile md:px-8 mb-8">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary uppercase">Before &amp; After</h3>
 <div class="h-1 w-12 bg-secondary mt-2"></div>
+<p class="text-on-surface-variant font-body-md mt-4 max-w-[640px]">Same footprint, same building, same budget-conscious owner. Drag the handle to see what a 30-day turnaround looks like.</p>
 </div>
-<div class="px-margin-mobile md:px-8 max-w-[900px] mx-auto flex flex-col gap-12">
-<!-- Bathroom pair -->
-<div>
-<p class="font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-3">Bathroom Renovation</p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<figure class="relative">
-<img alt="Apartment bathroom before renovation" class="w-full aspect-[3/4] object-cover" src="images/bathroom-before.jpg">
-<figcaption class="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 font-label-caps text-[10px]">BEFORE</figcaption>
-</figure>
-<figure class="relative">
-<img alt="Apartment bathroom after renovation" class="w-full aspect-[3/4] object-cover" src="images/bathroom-after.jpg">
-<figcaption class="absolute bottom-4 left-4 bg-secondary text-white px-2 py-1 font-label-caps text-[10px]">AFTER</figcaption>
-</figure>
+<div class="px-margin-mobile md:px-8 max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<p class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Bathroom Renovation</p>
+<p class="font-label-caps text-[10px] text-outline uppercase tracking-widest hidden sm:block">Drag to compare</p>
+</div>
+<div class="ba shadow-lg" style="--pos:50%">
+<img class="ba-before" src="images/bathroom-before.jpg" alt="Apartment bathroom before renovation" loading="lazy">
+<img class="ba-after" src="images/bathroom-after.jpg" alt="Apartment bathroom after renovation" loading="lazy">
+<span class="ba-tag ba-tag-before">Before</span>
+<span class="ba-tag ba-tag-after">After</span>
+<input type="range" min="0" max="100" value="50" aria-label="Compare bathroom renovation before and after">
+<div class="ba-line"></div>
+<div class="ba-knob" aria-hidden="true"><span class="material-symbols-outlined" style="font-size:20px">chevron_left</span><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></div>
 </div>
 </div>
-<!-- Kitchen pair -->
-<div>
-<p class="font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-3">Kitchen Renovation</p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<figure class="relative">
-<img alt="Apartment kitchen before renovation" class="w-full aspect-[3/4] object-cover" src="images/kitchen-before.jpg">
-<figcaption class="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 font-label-caps text-[10px]">BEFORE</figcaption>
-</figure>
-<figure class="relative">
-<img alt="Apartment kitchen after renovation" class="w-full aspect-[3/4] object-cover" src="images/kitchen-after.jpg">
-<figcaption class="absolute bottom-4 left-4 bg-secondary text-white px-2 py-1 font-label-caps text-[10px]">AFTER</figcaption>
-</figure>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<p class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Kitchen Renovation</p>
+<p class="font-label-caps text-[10px] text-outline uppercase tracking-widest hidden sm:block">Drag to compare</p>
+</div>
+<div class="ba shadow-lg" style="--pos:50%">
+<img class="ba-before" src="images/kitchen-before.jpg" alt="Apartment kitchen before renovation" loading="lazy">
+<img class="ba-after" src="images/kitchen-after.jpg" alt="Apartment kitchen after renovation" loading="lazy">
+<span class="ba-tag ba-tag-before">Before</span>
+<span class="ba-tag ba-tag-after">After</span>
+<input type="range" min="0" max="100" value="50" aria-label="Compare kitchen renovation before and after">
+<div class="ba-line"></div>
+<div class="ba-knob" aria-hidden="true"><span class="material-symbols-outlined" style="font-size:20px">chevron_left</span><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></div>
 </div>
 </div>
 </div>
 </section>
 <!-- Process Section -->
-<section class="px-margin-mobile md:px-8 py-16 bg-surface-container-low border-y border-outline-variant">
+<section id="process" class="px-margin-mobile md:px-8 py-16 bg-surface-container-low border-y border-outline-variant">
 <div class="max-w-[760px] mx-auto">
 <h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary mb-8">THE 30-DAY FLOW</h3>
 <div class="flex flex-col gap-10 relative">
@@ -325,7 +301,7 @@
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-secondary-fixed">handshake</span>
-<p class="font-body-md">Direct supplier connections for cost-price premium materials</p>
+<p class="font-body-md">Volume buying power &mdash; the material we purchase across 1,500+ units earns preferred supplier rates, and we pass those savings on to you</p>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-secondary-fixed">workspace_premium</span>
@@ -383,23 +359,23 @@
 <section class="px-margin-mobile md:px-8 py-16 bg-surface-container-low border-t border-outline-variant">
   <div class="max-w-[1280px] mx-auto flex flex-col gap-8">
     <div class="flex flex-col gap-2">
-      <h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary uppercase">Strategic Partnerships &amp; Procurement</h3>
+      <h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary uppercase">Buying Power That Lowers Your Cost</h3>
       <div class="h-1 w-12 bg-secondary"></div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
       <div class="flex flex-col gap-4">
         <p class="text-on-surface-variant font-body-md leading-relaxed">
-          As a full-service general contractor, we maintain deep relationships with New York's top material suppliers, securing preferred rates for our clients on high-end kitchens, slab countertops, professional appliances, hardwood flooring, and more.
+          We buy a lot of material. Renovating 1,500+ apartments means we purchase kitchens, slab countertops, appliances, tile, hardwood flooring, and fixtures in volume, and New York's top suppliers reward that with pricing a single-building owner can't get on their own.
         </p>
         <p class="text-on-surface-variant font-body-md leading-relaxed">
-          Our <span class="text-primary font-bold">proven track record of success</span> and <span class="text-primary font-bold">meticulous attention to detail</span> ensures every unit meets landlord-grade standards at cost-effective prices.
+          We leverage those long-standing <span class="text-primary font-bold">supplier relationships</span> on every job, so your units get <span class="text-primary font-bold">landlord-grade finishes at a lower cost</span>, delivered on a fixed price with meticulous attention to detail.
         </p>
       </div>
       <div class="grid grid-cols-2 gap-4 gap-6">
         <div class="border border-outline-variant/30 p-4 bg-white">
           <span class="material-symbols-outlined text-secondary mb-2">handshake</span>
           <h5 class="font-label-caps text-label-caps text-primary uppercase mb-1">Preferred Rates</h5>
-          <p class="text-[10px] text-on-surface-variant">Direct-to-owner pricing on premium materials.</p>
+          <p class="text-[10px] text-on-surface-variant">Volume pricing on premium materials, passed straight through to you.</p>
         </div>
         <div class="border border-outline-variant/30 p-4 bg-white">
           <span class="material-symbols-outlined text-secondary mb-2">inventory_2</span>
@@ -414,7 +390,11 @@
 <section id="contact" class="px-margin-mobile md:px-8 py-16 bg-white border-y border-outline-variant">
 <div class="max-w-[640px] mx-auto">
 <h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary mb-8 text-center uppercase">Get Your Estimate</h3>
-<form class="flex flex-col gap-8" id="estimateForm">
+<form class="flex flex-col gap-8" id="estimateForm" action="https://formsubmit.co/info@katrenovation.com" method="POST">
+<input type="hidden" name="_subject" value="New estimate request from katrenovation.com">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
 <div class="flex flex-col gap-1">
 <label class="font-label-caps text-[10px] text-outline uppercase">Name</label>
@@ -433,11 +413,11 @@
 <div class="grid grid-cols-2 gap-4">
 <div class="flex flex-col gap-1">
 <label class="font-label-caps text-[10px] text-outline uppercase"># of Units</label>
-<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="e.g. 5" type="number">
+<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="e.g. 5" type="number" name="units" min="1">
 </div>
 <div class="flex flex-col gap-1">
 <label class="font-label-caps text-[10px] text-outline uppercase">Renovation Type</label>
-<select class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2">
+<select name="building_type" class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2">
 <option>Condo</option>
 <option>Walk-up Rental</option>
 <option>Elevator Rental</option>
@@ -446,11 +426,11 @@
 </div>
 <div class="flex flex-col gap-1">
 <label class="font-label-caps text-[10px] text-outline uppercase">Budget Range</label>
-<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="$20k - $50k" type="text">
+<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="$20k - $50k" type="text" name="budget">
 </div>
 <div class="flex flex-col gap-1">
 <label class="font-label-caps text-[10px] text-outline uppercase">Project Description</label>
-<textarea class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="Tell us about the project..." rows="3"></textarea>
+<textarea class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="Tell us about the project..." rows="3" name="message"></textarea>
 </div>
 <button class="w-full bg-primary text-white py-5 font-headline-lg tracking-widest mt-4 hover:bg-secondary transition-colors" type="submit">
                     REQUEST SITE WALK
@@ -469,16 +449,15 @@
 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 <h2 class="font-headline-lg text-headline-lg text-primary tracking-widest">KAT RENOVATION</h2>
 <div class="flex flex-col md:flex-row md:flex-wrap md:justify-end gap-4 md:gap-8 font-body-md text-on-surface-variant">
-<a class="hover:text-primary transition-colors" href="#">PRIVACY POLICY</a>
-<a class="hover:text-primary transition-colors" href="#">TERMS OF SERVICE</a>
-<a class="hover:text-primary transition-colors" href="#">LICENSING</a>
-<a class="hover:text-primary transition-colors" href="#">INSTAGRAM</a>
-<a class="hover:text-primary transition-colors" href="#">LINKEDIN</a>
+<a class="hover:text-primary transition-colors" href="#work">OUR WORK</a>
+<a class="hover:text-primary transition-colors" href="#process">PROCESS</a>
+<a class="hover:text-primary transition-colors" href="#contact">GET ESTIMATE</a>
+<a class="hover:text-primary transition-colors" href="mailto:info@katrenovation.com">INFO@KATRENOVATION.COM</a>
 </div>
 </div>
 <div class="pt-8 border-t border-outline-variant/30 bg-surface-container-low p-4 rounded-lg max-w-[900px]">
 <p class="font-label-caps text-[10px] text-outline uppercase mb-4 leading-relaxed">
-                    *DISCLOSURE: 30-DAY TIMELINE STARTS FROM DOB PERMIT ISSUANCE. EXPEDITED SERVICES AVAILABLE. WE ARE A LICENSED &amp; INSURED NYC GENERAL CONTRACTOR.
+                    *DISCLOSURE: 30-DAY TIMELINE STARTS FROM DOB PERMIT ISSUANCE. EXPEDITED SERVICES AVAILABLE. KAT RENOVATION LLC IS A LICENSED &amp; INSURED GENERAL CONTRACTOR AND AN EPA LEAD-SAFE CERTIFIED FIRM. BASED IN ROSLYN, NY &middot; SERVING NEW YORK CITY.
                 </p>
 <p class="font-label-caps text-[10px] text-outline">
                     © 2026 KAT RENOVATION. ALL RIGHTS RESERVED.
@@ -524,6 +503,17 @@
 
         updateROI(); // Initial calc
 
+        // Before / after sliders
+        document.querySelectorAll('.ba').forEach(box => {
+            const range = box.querySelector('input[type=range]');
+            const set = v => { v = Math.max(0, Math.min(100, v)); box.style.setProperty('--pos', v + '%'); range.value = v; };
+            range.addEventListener('input', () => set(parseFloat(range.value)));
+            const fromEvent = e => set(((e.clientX - box.getBoundingClientRect().left) / box.offsetWidth) * 100);
+            let dragging = false;
+            box.addEventListener('pointerdown', e => { dragging = true; box.setPointerCapture(e.pointerId); fromEvent(e); });
+            box.addEventListener('pointermove', e => { if (dragging) fromEvent(e); });
+            ['pointerup','pointercancel','lostpointercapture'].forEach(t => box.addEventListener(t, () => { dragging = false; }));
+        });
         // Address Autocomplete (free, no API key — Photon / OpenStreetMap data, NYC-biased)
         const addressInput = document.getElementById('addressInput');
         const suggestionsBox = document.getElementById('addressSuggestions');
@@ -579,8 +569,24 @@
 
         // Contact form submission
         const estimateForm = document.getElementById('estimateForm');
-        estimateForm.addEventListener('submit', (e) => {
+        estimateForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const btn = estimateForm.querySelector('button[type=submit]');
+            btn.disabled = true; btn.textContent = 'SENDING…';
+            const data = Object.fromEntries(new FormData(estimateForm).entries());
+            try {
+                const res = await fetch('https://formsubmit.co/ajax/info@katrenovation.com', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) throw new Error('send failed');
+            } catch (err) {
+                btn.disabled = false; btn.textContent = 'REQUEST SITE WALK';
+                let note = document.getElementById('formError');
+                if (!note) { note = document.createElement('p'); note.id = 'formError'; note.className = 'text-center text-error text-sm'; estimateForm.appendChild(note); }
+                note.innerHTML = 'We couldn\'t send that automatically. Email us at <a class="underline" href="mailto:info@katrenovation.com">info@katrenovation.com</a> and we\'ll get right back to you.';
+                return;
+            }
             estimateForm.innerHTML = '<div class="text-center py-8"><span class="material-symbols-outlined text-secondary" style="font-size:48px;">check_circle</span><h4 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-4 uppercase">Request Received</h4><p class="text-on-surface-variant mt-2">Thanks. A KAT Renovation specialist will reach out within one business day to schedule your site walk.</p></div>';
         });
     </script>
