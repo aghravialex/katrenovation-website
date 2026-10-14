@@ -1,6 +1,6 @@
 # KAT Renovation website
 
-Static marketing site for KAT Renovation, served at https://katrenovation.com.
+Static marketing site for KAT Renovation, served at https://katrenos.com.
 
 - `index.html` — the whole site (Tailwind via CDN, no build step)
 - `images/` — before/after photos

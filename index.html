@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="canonical" href="https://katrenovation.com/">
+<link rel="canonical" href="https://katrenos.com/">
 <meta property="og:title" content="KAT Renovation | NYC Apartment Renovation Specialists">
 <meta property="og:description" content="Fixed-price apartment renovations for NYC multifamily and condo owners. Higher rents, faster turnarounds, building-code compliant.">
-<meta property="og:url" content="https://katrenovation.com/">
+<meta property="og:url" content="https://katrenos.com/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://katrenovation.com/images/kitchen-after.jpg">
+<meta property="og:image" content="https://katrenos.com/images/kitchen-after.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   :root{color-scheme:light}
@@ -374,8 +374,8 @@
 <section id="contact" class="px-margin-mobile md:px-8 py-16 bg-white border-y border-outline-variant">
 <div class="max-w-[640px] mx-auto">
 <h3 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg text-primary mb-8 text-center uppercase">Get Your Estimate</h3>
-<form class="flex flex-col gap-8" id="estimateForm" action="https://formsubmit.co/info@katrenovation.com" method="POST">
-<input type="hidden" name="_subject" value="New estimate request from katrenovation.com">
+<form class="flex flex-col gap-8" id="estimateForm" action="https://formsubmit.co/info@katrenos.com" method="POST">
+<input type="hidden" name="_subject" value="New estimate request from katrenos.com">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_template" value="table">
 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -436,7 +436,7 @@
 <a class="hover:text-primary transition-colors" href="#work">OUR WORK</a>
 <a class="hover:text-primary transition-colors" href="#process">PROCESS</a>
 <a class="hover:text-primary transition-colors" href="#contact">GET ESTIMATE</a>
-<a class="hover:text-primary transition-colors" href="mailto:info@katrenovation.com">INFO@KATRENOVATION.COM</a>
+<a class="hover:text-primary transition-colors" href="mailto:info@katrenos.com">INFO@KATRENOS.COM</a>
 </div>
 </div>
 <div class="pt-8 border-t border-outline-variant/30 bg-surface-container-low p-4 rounded-lg max-w-[900px]">
@@ -548,7 +548,7 @@
             btn.disabled = true; btn.textContent = 'SENDING…';
             const data = Object.fromEntries(new FormData(estimateForm).entries());
             try {
-                const res = await fetch('https://formsubmit.co/ajax/info@katrenovation.com', {
+                const res = await fetch('https://formsubmit.co/ajax/info@katrenos.com', {
                     method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(data)
                 });
@@ -557,7 +557,7 @@
                 btn.disabled = false; btn.textContent = 'REQUEST SITE WALK';
                 let note = document.getElementById('formError');
                 if (!note) { note = document.createElement('p'); note.id = 'formError'; note.className = 'text-center text-error text-sm'; estimateForm.appendChild(note); }
-                note.innerHTML = 'We couldn\'t send that automatically. Email us at <a class="underline" href="mailto:info@katrenovation.com">info@katrenovation.com</a> and we\'ll get right back to you.';
+                note.innerHTML = 'We couldn\'t send that automatically. Email us at <a class="underline" href="mailto:info@katrenos.com">info@katrenos.com</a> and we\'ll get right back to you.';
                 return;
             }
             estimateForm.innerHTML = '<div class="text-center py-8"><span class="material-symbols-outlined text-secondary" style="font-size:48px;">check_circle</span><h4 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-4 uppercase">Request Received</h4><p class="text-on-surface-variant mt-2">Thanks. A KAT Renovation specialist will reach out within one business day to schedule your site walk.</p></div>';
