@@ -379,50 +379,22 @@
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_template" value="table">
 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
 <div class="flex flex-col gap-1">
-<label class="font-label-caps text-[10px] text-outline uppercase">Name</label>
-<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="Full Name" type="text" name="name" autocomplete="name" required>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-caps text-[10px] text-outline uppercase">Email</label>
-<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="email@address.com" type="email" name="email" autocomplete="email" required>
-</div>
-</div>
-<div class="flex flex-col gap-1 relative">
-<label class="font-label-caps text-[10px] text-outline uppercase">Building Address</label>
-<input id="addressInput" class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="Start typing an address…" type="text" name="address" autocomplete="off">
-<ul id="addressSuggestions" class="hidden absolute top-full left-0 right-0 z-30 bg-white border border-outline-variant shadow-lg max-h-60 overflow-auto rounded-b"></ul>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<div class="flex flex-col gap-1">
-<label class="font-label-caps text-[10px] text-outline uppercase"># of Units</label>
-<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="e.g. 5" type="number" name="units" min="1">
+<label class="font-label-caps text-[10px] text-outline uppercase" for="f-name">Name</label>
+<input id="f-name" class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-3 text-base placeholder-on-surface-variant/30" placeholder="Full name" type="text" name="name" autocomplete="name" required>
 </div>
 <div class="flex flex-col gap-1">
-<label class="font-label-caps text-[10px] text-outline uppercase">Renovation Type</label>
-<select name="building_type" class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2">
-<option>Condo</option>
-<option>Walk-up Rental</option>
-<option>Elevator Rental</option>
-</select>
-</div>
+<label class="font-label-caps text-[10px] text-outline uppercase" for="f-company">Company <span class="normal-case tracking-normal font-normal">(optional)</span></label>
+<input id="f-company" class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-3 text-base placeholder-on-surface-variant/30" placeholder="Building owner or management company" type="text" name="company" autocomplete="organization">
 </div>
 <div class="flex flex-col gap-1">
-<label class="font-label-caps text-[10px] text-outline uppercase">Budget Range</label>
-<input class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="$20k - $50k" type="text" name="budget">
+<label class="font-label-caps text-[10px] text-outline uppercase" for="f-contact">Email or phone</label>
+<input id="f-contact" class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-3 text-base placeholder-on-surface-variant/30" placeholder="you@email.com or (212) 555-0100" type="text" name="email_or_phone" autocomplete="email" inputmode="email" required>
 </div>
-<div class="flex flex-col gap-1">
-<label class="font-label-caps text-[10px] text-outline uppercase">Project Description</label>
-<textarea class="border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary bg-transparent px-0 py-2 placeholder-on-surface-variant/30" placeholder="Tell us about the project..." rows="3" name="message"></textarea>
-</div>
-<button class="w-full bg-primary text-white py-5 font-headline-lg tracking-widest mt-4 hover:bg-secondary transition-colors" type="submit">
+<button class="w-full bg-primary text-white py-5 font-headline-lg tracking-widest mt-2 hover:bg-secondary transition-colors" type="submit">
                     REQUEST SITE WALK
                 </button>
-<div class="flex items-center justify-center gap-2 text-secondary">
-<span class="material-symbols-outlined" style="font-size: 20px;">shield</span>
-<span class="font-label-caps text-[10px] uppercase font-bold">30-Day Guarantee Badge</span>
-</div>
+<p class="text-center text-on-surface-variant text-sm -mt-4">We'll reach out within one business day. No spam, ever.</p>
 </form>
 </div>
 </section>
@@ -486,59 +458,6 @@
         });
 
         updateROI(); // Initial calc
-
-        // Address Autocomplete (free, no API key — Photon / OpenStreetMap data, NYC-biased)
-        const addressInput = document.getElementById('addressInput');
-        const suggestionsBox = document.getElementById('addressSuggestions');
-        let acTimer = null;
-
-        function hideSuggestions() {
-            suggestionsBox.classList.add('hidden');
-            suggestionsBox.innerHTML = '';
-        }
-
-        function formatFeature(p) {
-            const line1 = [p.housenumber, p.street || p.name].filter(Boolean).join(' ');
-            return [line1, p.city || p.district || p.county, p.state, p.postcode]
-                .filter(Boolean).join(', ');
-        }
-
-        addressInput.addEventListener('input', () => {
-            const q = addressInput.value.trim();
-            clearTimeout(acTimer);
-            if (q.length < 3) { hideSuggestions(); return; }
-            acTimer = setTimeout(async () => {
-                try {
-                    const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&lat=40.7128&lon=-74.0060&limit=5&lang=en`;
-                    const res = await fetch(url);
-                    const data = await res.json();
-                    const feats = (data.features || [])
-                        .filter(f => f.properties && f.properties.countrycode === 'US');
-                    if (!feats.length) { hideSuggestions(); return; }
-                    suggestionsBox.innerHTML = '';
-                    const seen = new Set();
-                    feats.forEach(f => {
-                        const label = formatFeature(f.properties);
-                        if (!label || seen.has(label)) return;
-                        seen.add(label);
-                        const li = document.createElement('li');
-                        li.textContent = label;
-                        li.className = 'px-3 py-2 text-sm text-on-surface hover:bg-surface-container cursor-pointer';
-                        li.addEventListener('mousedown', (e) => {
-                            e.preventDefault();
-                            addressInput.value = label;
-                            hideSuggestions();
-                        });
-                        suggestionsBox.appendChild(li);
-                    });
-                    suggestionsBox.classList.remove('hidden');
-                } catch (err) {
-                    hideSuggestions();
-                }
-            }, 300);
-        });
-
-        addressInput.addEventListener('blur', () => setTimeout(hideSuggestions, 150));
 
         // Contact form submission
         const estimateForm = document.getElementById('estimateForm');
