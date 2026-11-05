@@ -309,3 +309,23 @@ figcaption { font-size: 14px; line-height: 1.4; color: var(--muted); padding-top
   .reach .reach-main { background: var(--gold); color: var(--shed-deep); }
   .site-footer { padding-bottom: calc(clamp(40px, 6vw, 64px) + 60px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Tabs as a two-way switch, so the second option reads as a button */
+.tabs { gap: 0; border: 2px solid var(--shed); }
+.tabs a { padding: 9px 16px; color: var(--shed); background: #fff; }
+.tabs a:hover { background: var(--concrete); }
+.tabs a[aria-current="page"] { background: var(--shed); color: #fff; }
+.tabs a[aria-current="page"]::after { display: none; }
+@media (max-width: 640px) {
+  .tabs { margin: 0 0 10px; }
+  .tabs a { flex: 1; text-align: center; padding: 11px 8px; }
+}
+
+/* Retail mentions on the apartments page */
+.hero-copy .also { font-size: 16px; color: var(--muted); }
+.hero-copy .also a { color: var(--shed); font-weight: 600; text-underline-offset: 4px; }
+.promo { display: grid; gap: clamp(28px, 5vw, 64px); align-items: center; }
+@media (min-width: 900px) { .promo { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+.promo .lede { color: #d5ddd6; }
+.promo-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.promo-photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
