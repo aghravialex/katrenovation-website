@@ -284,3 +284,28 @@ figcaption { font-size: 14px; line-height: 1.4; color: var(--muted); padding-top
   .sched-axis .pre { font-size: 13px; letter-spacing: 0; }
   .sched-row .track { margin-top: 10px; }
 }
+
+/* Phone number and the reach bar */
+.site-header .phone, .tel { font: 700 20px/1 var(--display); letter-spacing: 0.02em; color: var(--shed); text-decoration: none; white-space: nowrap; }
+.site-header .phone:hover, .tel:hover { text-decoration: underline; text-underline-offset: 4px; }
+.tel { font-size: inherit; font-family: inherit; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: 3px; }
+.reach { display: none; }
+@media (max-width: 760px) {
+  .site-header .phone { display: none; }
+  .reach {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: 1fr 1fr 1.5fr;
+    background: var(--shed-deep);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .reach a {
+    display: flex; align-items: center; justify-content: center; min-height: 54px;
+    font: 700 18px/1 var(--display); letter-spacing: 0.06em; text-transform: uppercase;
+    color: #fff; text-decoration: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .reach a:first-child { border-left: 0; }
+  .reach .reach-main { background: var(--gold); color: var(--shed-deep); }
+  .site-footer { padding-bottom: calc(clamp(40px, 6vw, 64px) + 60px + env(safe-area-inset-bottom, 0px)); }
+}
