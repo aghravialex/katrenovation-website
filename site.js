@@ -26,6 +26,7 @@ if (cost) {
     const gross = (r * 12) / (k / 100);
     out('costVal', money(c)); out('rentVal', money(r)); out('capVal', k.toFixed(1));
     out('grossVal', money(gross)); out('costOut', money(c)); out('resultVal', money(gross - c));
+    [cost, rent, cap].forEach((el) => el.style.setProperty('--fill', ((el.value - el.min) / (el.max - el.min)) * 100 + '%'));
   };
   [cost, rent, cap].forEach((el) => el.addEventListener('input', update));
   update();
