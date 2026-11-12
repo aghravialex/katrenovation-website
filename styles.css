@@ -366,3 +366,18 @@ main:focus { outline: none; }
 /* Legible small print */
 .disclaimer { font-size: 14px; }
 .note, .legal { font-size: 14px; }
+
+/* FAQ */
+.faq-grid { display: grid; gap: clamp(24px, 5vw, 72px); align-items: start; }
+@media (min-width: 900px) { .faq-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); } }
+.faq { border-top: 2px solid var(--shed); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 56px; padding: 12px 0; cursor: pointer; list-style: none;
+  font: 600 22px/1.2 var(--display); letter-spacing: 0.01em; color: var(--shed);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; font: 600 28px/1 var(--display); color: var(--shed); }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { padding: 0 0 18px; max-width: 40em; }
