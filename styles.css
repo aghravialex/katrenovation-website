@@ -381,3 +381,12 @@ main:focus { outline: none; }
 .faq summary::after { content: "+"; flex: none; font: 600 28px/1 var(--display); color: var(--shed); }
 .faq details[open] summary::after { content: "\2212"; }
 .faq details p { padding: 0 0 18px; max-width: 40em; }
+
+/* Reviews */
+.stars { color: var(--gold); letter-spacing: 2px; }
+.reviews { display: grid; gap: 20px; margin-top: 32px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); align-items: start; }
+.review { background: var(--concrete); border-top: 3px solid var(--gold); padding: 22px 22px 20px; }
+.review .stars { font-size: 18px; }
+.review blockquote { margin: 10px 0 14px; font-size: 16px; line-height: 1.55; }
+.review figcaption { font: 600 17px/1.2 var(--display); letter-spacing: 0.02em; }
+.review figcaption span { display: block; font: 400 13px/1.4 var(--body); color: var(--muted); margin-top: 2px; }
